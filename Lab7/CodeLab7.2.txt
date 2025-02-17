@@ -1,0 +1,22 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+bool isPerfectSquare(int x) {
+    if (x < 0) return false;
+    int r = static_cast<int>(sqrt(x));
+    return r * r == x;
+}
+
+template<typename... Args>
+int kvadr(Args... args) {
+    return ((isPerfectSquare(args) ? 1 : 0) + ...);
+}
+
+int main() {
+    cout << "kvadr(4, 5, 16) = " << kvadr(4, 5, 16) << "\n";
+    cout << "kvadr(1, 2, 3, 4, 5, 9, 10) = " << kvadr(1, 2, 3, 4, 5, 9, 10) << "\n";
+    cout << "kvadr(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 16) = " << kvadr(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 16) << "\n";
+    
+    return 0;
+}

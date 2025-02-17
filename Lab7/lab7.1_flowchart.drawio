@@ -1,0 +1,127 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0" version="26.0.14">
+  <diagram name="Page-1" id="2019067193920">
+    <mxGraphModel dx="3234" dy="1342" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2019067194256" value="Начало" style="whiteSpace=wrap;rounded=0;dashed=0;strokeWidth=2;shape=mxgraph.flowchart.start_1;" parent="1" vertex="1">
+          <mxGeometry x="40" y="50" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2019067194400" value="#include &lt;iostream&gt; using namespace std;" style="whiteSpace=wrap;rounded=0;dashed=0;strokeWidth=2;shape=mxgraph.flowchart.annotation_1;align=left;pointerEvents=1;" parent="1" vertex="1">
+          <mxGeometry x="330" y="50" width="140" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2019067194544" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;dashed=1;dashPattern=8 8;rounded=0;jettySize=auto;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;targetPerimeterSpacing=0;sourcePerimeterSpacing=0;" parent="1" source="2019067194400" target="2019067194256" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2019067194688" value="int main()" style="whiteSpace=wrap;rounded=0;dashed=0;inherit=default;shape=process;backgroundOutline=1;" parent="1" vertex="1">
+          <mxGeometry x="40" y="150" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2019067194832" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;targetPerimeterSpacing=0;sourcePerimeterSpacing=0;" parent="1" source="2019067194256" target="2019067194688" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2019067195024" value="double a = 8.5, b = 3.2;" style="whiteSpace=wrap;rounded=1;dashed=0;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="16" y="270" width="168" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2019067195168" value="cout &lt;&lt; &quot;Вычитание десятичных дробей: &quot; &lt;&lt; a &lt;&lt; &quot; - &quot; &lt;&lt; b &lt;&lt; &quot; = &quot; &lt;&lt; subtract(a, b) &lt;&lt; &quot;\n&quot;;" style="whiteSpace=wrap;rounded=1;dashed=0;shape=parallelogram;strokeWidth=2;perimter=parallelogramPerimeter;arcSize=12;size=0.23;" parent="1" vertex="1">
+          <mxGeometry x="-249" y="390" width="698" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2019067195360" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;targetPerimeterSpacing=0;sourcePerimeterSpacing=0;" parent="1" source="2019067195024" target="2019067195168" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2019067195312" value="int num1 = 3, den1 = 4, num2 = 1, den2 = 2;" style="whiteSpace=wrap;rounded=1;dashed=0;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="-50.5" y="490" width="301" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="2019067195648" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;targetPerimeterSpacing=0;sourcePerimeterSpacing=0;" parent="1" source="2019067195168" target="2019067195312" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2019067195600" value="int resNum, resDen;" style="whiteSpace=wrap;rounded=1;dashed=0;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="33.5" y="570" width="133" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2019067195936" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;targetPerimeterSpacing=0;sourcePerimeterSpacing=0;" parent="1" source="2019067195312" target="2019067195600" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2019067195888" value="subtract(num1, den1, num2, den2, resNum, resDen);" style="whiteSpace=wrap;rounded=1;dashed=0;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="-71.5" y="680" width="343" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2019067196224" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;targetPerimeterSpacing=0;sourcePerimeterSpacing=0;" parent="1" source="2019067195600" target="2019067195888" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2019067196176" value="cout &lt;&lt; &quot;Вычитание обыкновенных дробей: &quot;;" style="whiteSpace=wrap;rounded=1;dashed=0;shape=parallelogram;strokeWidth=2;perimter=parallelogramPerimeter;arcSize=12;size=0.23;" parent="1" vertex="1">
+          <mxGeometry x="-67" y="800" width="334" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2019067196512" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;targetPerimeterSpacing=0;sourcePerimeterSpacing=0;" parent="1" source="2019067195888" target="2019067196176" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2019067196464" value="&lt;&lt; num1 &lt;&lt; &quot;/&quot; &lt;&lt; den1 &lt;&lt; &quot; - &quot;;" style="whiteSpace=wrap;rounded=1;dashed=0;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="-12" y="920" width="224" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2019067196800" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;targetPerimeterSpacing=0;sourcePerimeterSpacing=0;" parent="1" source="2019067196176" target="2019067196464" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2019067196752" value="&lt;&lt; num2 &lt;&lt; &quot;/&quot; &lt;&lt; den2 &lt;&lt; &quot; = &quot;;" style="whiteSpace=wrap;rounded=1;dashed=0;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="-12" y="1040" width="224" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2019067197088" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;targetPerimeterSpacing=0;sourcePerimeterSpacing=0;" parent="1" source="2019067196464" target="2019067196752" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2019046059904" value="&lt;&lt; resNum &lt;&lt; &quot;/&quot; &lt;&lt; resDen &lt;&lt; &quot;\n&quot;;" style="whiteSpace=wrap;rounded=1;dashed=0;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="-22.5" y="1160" width="245" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2019046064080" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;targetPerimeterSpacing=0;sourcePerimeterSpacing=0;" parent="1" source="2019067196752" target="2019046059904" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2019046063984" value="return 0;" style="whiteSpace=wrap;rounded=0;dashed=0;strokeWidth=2;shape=mxgraph.flowchart.terminator;" parent="1" vertex="1">
+          <mxGeometry x="40" y="1280" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2019046063840" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;targetPerimeterSpacing=0;sourcePerimeterSpacing=0;" parent="1" source="2019046059904" target="2019046063984" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2019046062976" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;targetPerimeterSpacing=0;sourcePerimeterSpacing=0;" parent="1" source="2019067194688" target="2019067195024" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2019046062592" value="int gcd(int a, int b)" style="whiteSpace=wrap;rounded=0;dashed=0;inherit=default;shape=process;backgroundOutline=1;" parent="1" vertex="1">
+          <mxGeometry x="726.5" y="50" width="147" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2019046062112" value="return b == 0 ? a : gcd(b, a % b);" style="whiteSpace=wrap;rounded=0;dashed=0;strokeWidth=2;shape=mxgraph.flowchart.terminator;" parent="1" vertex="1">
+          <mxGeometry x="681" y="170" width="238" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2019046063456" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;targetPerimeterSpacing=0;sourcePerimeterSpacing=0;" parent="1" source="2019046062592" target="2019046062112" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2019046062784" value="void subtract(int num1, int den1, int num2, int den2, int &amp;resNum, int &amp;resDen)" style="whiteSpace=wrap;rounded=0;dashed=0;inherit=default;shape=process;backgroundOutline=1;" parent="1" vertex="1">
+          <mxGeometry x="1123.5" y="50" width="553" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2019046062688" value="resNum = num1 * den2 - num2 * den1;" style="whiteSpace=wrap;rounded=1;dashed=0;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="1277.5" y="170" width="245" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2019046062928" value="resDen = den1 * den2;" style="whiteSpace=wrap;rounded=1;dashed=0;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="1326.5" y="290" width="147" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2019046063024" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;targetPerimeterSpacing=0;sourcePerimeterSpacing=0;" parent="1" source="2019046062688" target="2019046062928" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2019046062496" value="int g = gcd(abs(resNum), abs(resDen));" style="whiteSpace=wrap;rounded=1;dashed=0;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="1267" y="410" width="266" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2019046062160" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;targetPerimeterSpacing=0;sourcePerimeterSpacing=0;" parent="1" source="2019046062928" target="2019046062496" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2019046062304" value="resNum /= g;" style="whiteSpace=wrap;rounded=1;dashed=0;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="1340" y="530" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2019046061872" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;targetPerimeterSpacing=0;sourcePerimeterSpacing=0;" parent="1" source="2019046062496" target="2019046062304" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2019046062016" value="resDen /= g;" style="whiteSpace=wrap;rounded=1;dashed=0;absoluteArcSize=1;arcSize=14;strokeWidth=2;" parent="1" vertex="1">
+          <mxGeometry x="1340" y="650" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2019046061584" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;targetPerimeterSpacing=0;sourcePerimeterSpacing=0;" parent="1" source="2019046062304" target="2019046062016" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2019046062832" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;rounded=0;jettySize=auto;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;targetPerimeterSpacing=0;sourcePerimeterSpacing=0;" parent="1" source="2019046062784" target="2019046062688" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

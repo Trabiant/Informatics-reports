@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+
+int gcd(int a, int b) {
+    return b == 0 ? a : gcd(b, a % b);
+}
+
+double subtract(double a, double b) {
+    return a - b;
+}
+
+void subtract(int num1, int den1, int num2, int den2, int& resNum, int& resDen) {
+    resNum = num1 * den2 - num2 * den1;
+    resDen = den1 * den2;
+    int g = gcd(abs(resNum), abs(resDen));
+    resNum /= g;
+    resDen /= g;
+}
+
+int main() {
+    double a = 8.5, b = 3.2;
+    cout << "Вычитание десятичных дробей: " << a << " - " << b << " = " << subtract(a, b) << "\n";
+
+    int num1 = 3, den1 = 4, num2 = 1, den2 = 2;
+    int resNum, resDen;
+    subtract(num1, den1, num2, den2, resNum, resDen);
+    cout << "Вычитание обыкновенных дробей: "
+        << num1 << "/" << den1 << " - "
+        << num2 << "/" << den2 << " = "
+        << resNum << "/" << resDen << "\n";
+
+    return 0;
+}
