@@ -1,0 +1,52 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring> 
+using namespace std;
+bool isPalindrome(const char* s)
+{
+    int len = strlen(s);
+    int i = 0, j = len - 1;
+    while (i < j) {
+        if (s[i] != s[j])
+            return false;
+        i++;
+        j--;
+    }
+    return true;
+}
+int main()
+{
+    system("chcp 1251");
+    system("cls");
+    cout << "Введите предложение с палиндромом:" << endl;
+    char s[256];
+    cin.getline(s, 256);
+    int len = strlen(s);
+    if (len > 0 && s[len - 1] == '.')
+    {
+        s[len - 1] = '\0';
+        len--;
+    }
+    char copy[256];
+    strcpy_s(copy, s);
+    char* token;
+    char* context;
+    token = strtok_s(copy, " ", &context);
+    bool found = false;
+    cout << "Слова-палиндромы:" << endl;
+    while (token != NULL)
+    {
+        if (isPalindrome(token))
+        {
+            cout << token << endl;
+            found = true;
+        }
+        token = strtok_s(NULL, " ", &context);
+    }
+    if (!found)
+    {
+        cout << "Нет слов-палиндромов" << endl;
+    }
+    return 0;
+}
+
