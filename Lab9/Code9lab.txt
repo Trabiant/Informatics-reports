@@ -1,0 +1,109 @@
+#include <iostream>
+#include <fstream>
+#include <stdio.h>
+
+using namespace std;
+
+#define MAXLINE 256
+
+int my_strlen(const char* s) {
+    int len = 0;
+    while (s[len] != '\0')
+        len++;
+    return len;
+}
+
+void my_strcpy(char* dest, const char* src) {
+    int i = 0;
+    while (src[i] != '\0') {
+        dest[i] = src[i];
+        i++;
+    }
+    dest[i] = '\0';
+}
+
+int main() {
+    setlocale(LC_ALL, "ru");
+    system("chcp 1251");
+    system("cls");
+    char letter;
+    cout << "Введите букву: ";
+    cin >> letter;
+
+    ifstream fin("F1.txt");
+    if (!fin) {
+        cout << "Не удалось открыть файл F1.txt" << endl;
+        return 1;
+    }
+
+    ofstream fout("F2.txt");
+    if (!fout) {
+        cout << "Не удалось открыть файл F2.txt" << endl;
+        return 1;
+    }
+
+    char line[MAXLINE];
+    while (fin.getline(line, MAXLINE)) {
+        bool skip = false;
+        bool inWord = false;
+        for (int i = 0; line[i] != '\0'; i++) {
+            if (line[i] != ' ' && line[i] != '\t') {
+                if (!inWord) {
+                    if (line[i] == letter) {
+                        skip = true;
+                        break;
+                    }
+                    inWord = true;
+                }
+            }
+            else {
+                inWord = false;
+            }
+        }
+        if (!skip) {
+            fout << line << "\n";
+        }
+    }
+
+    fin.close();
+    fout.close();
+
+    ifstream fin2("F2.txt");
+    if (!fin2) {
+        cout << "Не удалось открыть файл F2.txt" << endl;
+        return 1;
+    }
+
+    char shortest[MAXLINE] = "";
+    int minLen = MAXLINE;
+
+    while (fin2.getline(line, MAXLINE)) {
+        int i = 0;
+        while (line[i] != '\0') {
+            while (line[i] == ' ' || line[i] == '\t')
+                i++;
+            if (line[i] == '\0')
+                break;
+            char word[MAXLINE];
+            int j = 0;
+            while (line[i] != ' ' && line[i] != '\t' && line[i] != '\0') {
+                word[j++] = line[i++];
+            }
+            word[j] = '\0';
+            if (j > 0 && j < minLen) {
+                minLen = j;
+                my_strcpy(shortest, word);
+            }
+        }
+    }
+    fin2.close();
+
+    if (minLen == MAXLINE) {
+        cout << "Файл F2 пустой или не содержит слов." << endl;
+    }
+    else {
+        cout << "Самое короткое слово в файле F2: " << shortest << endl;
+    }
+
+    return 0;
+}
