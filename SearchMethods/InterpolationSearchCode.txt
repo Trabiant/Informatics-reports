@@ -1,0 +1,39 @@
+#include <iostream>
+#include <clocale>
+using namespace std;
+
+int interpolationSearch(int arr[], int n, int key) {
+    int low = 0, high = n - 1;
+    
+    while (low <= high && key >= arr[low] && key <= arr[high]) {
+        if (low == high) {
+            return (arr[low] == key) ? low : -1;
+        }
+        int pos = low + ((key - arr[low]) * (high - low)) / (arr[high] - arr[low]);
+        
+        if (arr[pos] == key)
+            return pos;
+        if (arr[pos] < key)
+            low = pos + 1;
+        else
+            high = pos - 1;
+    }
+    return -1;
+}
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    int arr[] = {2, 4, 6, 8, 10, 12};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int key;
+    cout << "Введите число для поиска: ";
+    cin >> key;
+    
+    int index = interpolationSearch(arr, n, key);
+    if (index != -1)
+        cout << "Элемент найден на позиции: " << index << endl;
+    else
+        cout << "Элемент не найден" << endl;
+    
+    return 0;
+}
