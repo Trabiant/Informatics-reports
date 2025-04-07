@@ -1,0 +1,113 @@
+RightTriangle.h
+
+#ifndef RIGHT_TRIANGLE_H
+#define RIGHT_TRIANGLE_H
+
+class RightTriangle {
+private:
+    double first;  // Катет a
+    double second; // Катет b
+
+public:
+    RightTriangle(); // Конструктор по умолчанию
+    bool Init(double f, double s); // Инициализация с проверкой
+    void Read(); // Ввод с клавиатуры
+    void Show() const; // Вывод на экран
+    double hypotenuse() const; // Вычисление гипотенузы
+};
+
+RightTriangle make_RightTriangle(double f, double s); // Внешняя функция
+
+#endif
+
+RightTriangle.cpp
+
+#include "RightTriangle.h"
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+RightTriangle::RightTriangle() : first(0), second(0) {}
+
+bool RightTriangle::Init(double f, double s) {
+    if (f > 0 && s > 0) {
+        first = f;
+        second = s;
+        return true;
+    }
+    cout << "Ошибка: катеты должны быть положительными числами!\n";
+    first = second = 1; // Значения по умолчанию
+    return false;
+}
+
+void RightTriangle::Read() {
+    double f, s;
+    do {
+        cout << "Введите катет a: ";
+        cin >> f;
+        cout << "Введите катет b: ";
+        cin >> s;
+    } while (!Init(f, s));
+}
+
+void RightTriangle::Show() const {
+    cout << "Катет a = " << first << ", Катет b = " << second << endl;
+    cout << "Гипотенуза = " << hypotenuse() << endl;
+}
+
+double RightTriangle::hypotenuse() const {
+    return sqrt(first * first + second * second);
+}
+
+RightTriangle make_RightTriangle(double f, double s) {
+    RightTriangle rt;
+    if (!rt.Init(f, s)) {
+        cout << "Создан объект с значениями по умолчанию.\n";
+    }
+    return rt;
+}
+
+main.cpp
+
+#include "RightTriangle.h"
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+
+    // Создание объекта с конструктором по умолчанию
+    RightTriangle rt1;
+    rt1.Show();
+
+    // Создание объекта через Init
+    RightTriangle rt2;
+    rt2.Init(3.0, 4.0);
+    rt2.Show();
+
+    // Создание объекта через Read
+    RightTriangle rt3;
+    rt3.Read();
+    rt3.Show();
+
+    // Создание объекта через внешнюю функцию
+    RightTriangle rt4 = make_RightTriangle(5.0, 12.0);
+    rt4.Show();
+
+    // Создание массива объектов
+    RightTriangle triangles[3];
+    for (int i = 0; i < 3; i++) {
+        cout << "\nВвод данных для треугольника " << i + 1 << ":\n";
+        triangles[i].Read();
+    }
+
+    cout << "\nМассив треугольников:\n";
+    for (int i = 0; i < 3; i++) {
+        cout << "Треугольник " << i + 1 << ":\n";
+        triangles[i].Show();
+    }
+
+    return 0;
+}

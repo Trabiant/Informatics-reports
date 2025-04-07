@@ -1,0 +1,184 @@
+Triad.h
+#ifndef TRIAD_H
+#define TRIAD_H
+
+#include <iostream>
+
+class Triad {
+protected:
+    int first, second, third;
+
+public:
+    Triad();
+    Triad(int f, int s, int t);
+    Triad(const Triad& other);
+    virtual ~Triad();
+
+    int getFirst() const;
+    int getSecond() const;
+    int getThird() const;
+    void setFirst(int f);
+    void setSecond(int s);
+    void setThird(int t);
+
+    void incrementFirst();
+    void incrementSecond();
+    void incrementThird();
+
+    Triad& operator=(const Triad& other);
+
+    friend std::ostream& operator<<(std::ostream& os, const Triad& t);
+    friend std::istream& operator>>(std::istream& is, Triad& t);
+};
+
+#endif
+
+Triad.cpp
+#include "Triad.h"
+#include <iostream>
+
+using namespace std;
+
+Triad::Triad() : first(0), second(0), third(0) {}
+Triad::Triad(int f, int s, int t) : first(f), second(s), third(t) {}
+Triad::Triad(const Triad& other) : first(other.first), second(other.second), third(other.third) {}
+Triad::~Triad() {}
+
+int Triad::getFirst() const { return first; }
+int Triad::getSecond() const { return second; }
+int Triad::getThird() const { return third; }
+void Triad::setFirst(int f) { first = f; }
+void Triad::setSecond(int s) { second = s; }
+void Triad::setThird(int t) { third = t; }
+
+void Triad::incrementFirst() { first++; }
+void Triad::incrementSecond() { second++; }
+void Triad::incrementThird() { third++; }
+
+Triad& Triad::operator=(const Triad& other) {
+    if (this != &other) {
+        first = other.first;
+        second = other.second;
+        third = other.third;
+    }
+    return *this;
+}
+
+ostream& operator<<(ostream& os, const Triad& t) {
+    os << t.first << " " << t.second << " " << t.third;
+    return os;
+}
+
+istream& operator>>(istream& is, Triad& t) {
+    is >> t.first >> t.second >> t.third;
+    return is;
+}
+
+Date.h
+
+#ifndef DATE_H
+#define DATE_H
+
+#include "Triad.h"
+
+class Date : public Triad {
+public:
+    Date();
+    Date(int year, int month, int day);
+    Date(const Date& other);
+    ~Date();
+
+    void incrementFirst(); // Увеличение года
+    void incrementSecond(); // Увеличение месяца
+    void incrementThird(); // Увеличение дня
+    void addDays(int n); // Увеличение даты на n дней
+
+    friend std::ostream& operator<<(std::ostream& os, const Date& d);
+    friend std::istream& operator>>(std::istream& is, Date& d);
+};
+
+#endif
+
+
+Date.cpp
+
+#include "Date.h"
+#include <iostream>
+
+using namespace std;
+
+Date::Date() : Triad(2000, 1, 1) {}
+Date::Date(int year, int month, int day) : Triad(year, month, day) {}
+Date::Date(const Date& other) : Triad(other) {}
+Date::~Date() {}
+
+void Date::incrementFirst() { first++; }
+void Date::incrementSecond() {
+    second++;
+    if (second > 12) {
+        second = 1;
+        incrementFirst();
+    }
+}
+void Date::incrementThird() {
+    third++;
+    int daysInMonth = 31; // Упрощение: считаем 31 день максимум
+    if (second == 4 || second == 6 || second == 9 || second == 11) daysInMonth = 30;
+    else if (second == 2) daysInMonth = (first % 4 == 0 && first % 100 != 0) || (first % 400 == 0) ? 29 : 28;
+    if (third > daysInMonth) {
+        third = 1;
+        incrementSecond();
+    }
+}
+
+void Date::addDays(int n) {
+    for (int i = 0; i < n; i++) incrementThird();
+}
+
+ostream& operator<<(ostream& os, const Date& d) {
+    os << d.first << "-" << (d.second < 10 ? "0" : "") << d.second << "-" << (d.third < 10 ? "0" : "") << d.third;
+    return os;
+}
+
+istream& operator>>(istream& is, Date& d) {
+    cout << "Введите год, месяц, день: ";
+    is >> d.first >> d.second >> d.third;
+    return is;
+}
+
+main.cpp
+
+#include "Date.h"
+#include <iostream>
+
+using namespace std;
+
+Triad processTriad(Triad t) {
+    t.incrementFirst();
+    return t;
+}
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+
+    Triad t1(1, 2, 3);
+    cout << "t1: " << t1 << endl;
+
+    Date d1(2023, 12, 31);
+    cout << "d1: " << d1 << endl;
+
+    d1.incrementThird();
+    cout << "После увеличения дня: " << d1 << endl;
+
+    d1.addDays(5);
+    cout << "После добавления 5 дней: " << d1 << endl;
+
+    // Принцип подстановки
+    Triad* t2 = new Date(2024, 1, 1);
+    cout << "t2 (Date как Triad): " << *t2 << endl;
+    *t2 = processTriad(*t2);
+    cout << "После обработки: " << *t2 << endl;
+
+    delete t2;
+    return 0;
+}

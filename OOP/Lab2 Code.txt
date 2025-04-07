@@ -1,0 +1,100 @@
+Exam.h
+
+#ifndef EXAM_H
+#define EXAM_H
+
+#include <string>
+
+class Exam {
+private:
+    std::string studentName;
+    std::string subject;
+    int grade;
+
+public:
+    Exam(); // Без параметров
+    Exam(std::string name, std::string subj, int g); // С параметрами
+    Exam(const Exam& other); // Копирования
+    ~Exam(); // Деструктор
+
+    // Селекторы
+    std::string getName() const;
+    std::string getSubject() const;
+    int getGrade() const;
+
+    // Модификаторы
+    void setName(std::string name);
+    void setSubject(std::string subj);
+    void setGrade(int g);
+
+    void Show() const;
+};
+
+#endif
+
+Exam.cpp
+
+#include "Exam.h"
+#include <iostream>
+
+using namespace std;
+
+Exam::Exam() : studentName("Unknown"), subject("Unknown"), grade(0) {
+    cout << "Вызван конструктор по умолчанию\n";
+}
+
+Exam::Exam(string name, string subj, int g) : studentName(name), subject(subj), grade(g) {
+    cout << "Вызван конструктор с параметрами\n";
+}
+
+Exam::Exam(const Exam& other) : studentName(other.studentName), subject(other.subject), grade(other.grade) {
+    cout << "Вызван конструктор копирования\n";
+}
+
+Exam::~Exam() {
+    cout << "Вызван деструктор для " << studentName << endl;
+}
+
+string Exam::getName() const { return studentName; }
+string Exam::getSubject() const { return subject; }
+int Exam::getGrade() const { return grade; }
+
+void Exam::setName(string name) { studentName = name; }
+void Exam::setSubject(string subj) { subject = subj; }
+void Exam::setGrade(int g) { grade = g; }
+
+void Exam::Show() const {
+    cout << "Студент: " << studentName << ", Предмет: " << subject << ", Оценка: " << grade << endl;
+}
+
+main.cpp
+
+#include "Exam.h"
+#include <iostream>
+
+using namespace std;
+
+void printExam(Exam e) { // Вызов конструктора копирования
+    e.Show();
+}
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+
+    // Конструктор без параметров
+    Exam e1;
+    e1.Show();
+
+    // Конструктор с параметрами
+    Exam e2("Иванов", "Математика", 5);
+    e2.Show();
+
+    // Конструктор копирования
+    Exam e3 = e2;
+    e3.Show();
+
+    // Еще один случай вызова конструктора копирования
+    printExam(e2);
+
+    return 0;
+}

@@ -1,0 +1,141 @@
+Set.h
+
+#ifndef SET_H
+#define SET_H
+
+#include <vector>
+#include <iostream>
+
+template<typename T>
+class Set {
+private:
+    std::vector<T> elements;
+
+public:
+    Set() {}
+    Set(const Set& other) : elements(other.elements) {}
+    ~Set() {}
+
+    void add(T value) {
+        if (std::find(elements.begin(), elements.end(), value) == elements.end()) {
+            elements.push_back(value);
+        }
+    }
+
+    T& operator[](int index) { return elements[index]; }
+    int operator()() const { return elements.size(); }
+    Set operator-(const Set& other) const {
+        Set result;
+        for (const T& val : elements) {
+            if (std::find(other.elements.begin(), other.elements.end(), val) == other.elements.end()) {
+                result.add(val);
+            }
+        }
+        return result;
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, const Set& s) {
+        for (const T& val : s.elements) os << val << " ";
+        return os;
+    }
+
+    friend std::istream& operator>>(std::istream& is, Set& s) {
+        int n;
+        T val;
+        std::cout << "Введите количество элементов: ";
+        is >> n;
+        for (int i = 0; i < n; i++) {
+            is >> val;
+            s.add(val);
+        }
+        return is;
+    }
+
+    Set& operator=(const Set& other) {
+        if (this != &other) elements = other.elements;
+        return *this;
+    }
+};
+
+#endif
+
+
+Money.h
+
+#ifndef MONEY_H
+#define MONEY_H
+
+#include <iostream>
+
+class Money {
+private:
+    long rubles;
+    int kopecks;
+
+public:
+    Money() : rubles(0), kopecks(0) {}
+    Money(long r, int k) : rubles(r), kopecks(k) {}
+
+    friend std::ostream& operator<<(std::ostream& os, const Money& m) {
+        os << m.rubles << "," << (m.kopecks < 10 ? "0" : "") << m.kopecks;
+        return os;
+    }
+
+    friend std::istream& operator>>(std::istream& is, Money& m) {
+        std::cout << "Рубли: ";
+        is >> m.rubles;
+        std::cout << "Копейки: ";
+        is >> m.kopecks;
+        return is;
+    }
+
+    bool operator==(const Money& other) const {
+        return rubles == other.rubles && kopecks == other.kopecks;
+    }
+};
+
+#endif
+
+
+main.cpp
+
+#include "Set.h"
+#include "Money.h"
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+
+    // Для int
+    Set<int> s1;
+    s1.add(1);
+    s1.add(2);
+    cout << "Set<int>: " << s1 << endl;
+    cout << "Размер: " << s1() << endl;
+
+    // Для float
+    Set<float> s2;
+    s2.add(1.5);
+    s2.add(2.5);
+    cout << "Set<float>: " << s2 << endl;
+
+    // Для double
+    Set<double> s3;
+    s3.add(3.14);
+    cout << "Set<double>: " << s3 << endl;
+
+    // Для Money
+    Set<Money> s4;
+    s4.add(Money(100, 50));
+    s4.add(Money(200, 75));
+    cout << "Set<Money>: " << s4 << endl;
+
+    Set<Money> s5;
+    s5.add(Money(100, 50));
+    Set<Money> s6 = s4 - s5;
+    cout << "s4 - s5: " << s6 << endl;
+
+    return 0;
+}

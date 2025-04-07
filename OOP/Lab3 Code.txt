@@ -1,0 +1,134 @@
+Money.h
+
+#ifndef MONEY_H
+#define MONEY_H
+
+#include <iostream>
+
+class Money {
+private:
+    long rubles;
+    int kopecks;
+
+public:
+    Money(); // Без параметров
+    Money(long r, int k); // С параметрами
+    Money(const Money& other); // Копирования
+    ~Money();
+
+    // Селекторы и модификаторы
+    long getRubles() const;
+    int getKopecks() const;
+    void setRubles(long r);
+    void setKopecks(int k);
+
+    // Перегрузка операций
+    Money& operator=(const Money& other);
+    bool operator==(const Money& other) const;
+    bool operator!=(const Money& other) const;
+    Money& operator--(); // Префиксная форма
+    Money operator--(int); // Постфиксная форма
+
+    // Дружественные функции для ввода-вывода
+    friend std::ostream& operator<<(std::ostream& os, const Money& m);
+    friend std::istream& operator>>(std::istream& is, Money& m);
+};
+
+#endif
+
+Money.cpp
+
+#include "Money.h"
+#include <iostream>
+
+using namespace std;
+
+Money::Money() : rubles(0), kopecks(0) {}
+Money::Money(long r, int k) : rubles(r), kopecks(k) {}
+Money::Money(const Money& other) : rubles(other.rubles), kopecks(other.kopecks) {}
+Money::~Money() {}
+
+long Money::getRubles() const { return rubles; }
+int Money::getKopecks() const { return kopecks; }
+void Money::setRubles(long r) { rubles = r; }
+void Money::setKopecks(int k) { kopecks = k; }
+
+Money& Money::operator=(const Money& other) {
+    if (this != &other) {
+        rubles = other.rubles;
+        kopecks = other.kopecks;
+    }
+    return *this;
+}
+
+bool Money::operator==(const Money& other) const {
+    return rubles == other.rubles && kopecks == other.kopecks;
+}
+
+bool Money::operator!=(const Money& other) const {
+    return !(*this == other);
+}
+
+Money& Money::operator--() {
+    if (kopecks > 0) kopecks--;
+    else if (rubles > 0) {
+        rubles--;
+        kopecks = 99;
+    }
+    return *this;
+}
+
+Money Money::operator--(int) {
+    Money temp = *this;
+    --(*this);
+    return temp;
+}
+
+ostream& operator<<(ostream& os, const Money& m) {
+    os << m.rubles << "," << (m.kopecks < 10 ? "0" : "") << m.kopecks;
+    return os;
+}
+
+istream& operator>>(istream& is, Money& m) {
+    cout << "Введите рубли: ";
+    is >> m.rubles;
+    cout << "Введите копейки: ";
+    is >> m.kopecks;
+    if (m.kopecks >= 100) {
+        m.rubles += m.kopecks / 100;
+        m.kopecks %= 100;
+    }
+    return is;
+}
+
+main.cpp
+
+#include "Money.h"
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+
+    Money m1(100, 50);
+    cout << "m1 = " << m1 << endl;
+
+    Money m2;
+    cin >> m2;
+    cout << "m2 = " << m2 << endl;
+
+    Money m3 = m1;
+    cout << "m3 (копия m1) = " << m3 << endl;
+
+    cout << "m1 == m3: " << (m1 == m3 ? "да" : "нет") << endl;
+    cout << "m1 != m2: " << (m1 != m2 ? "да" : "нет") << endl;
+
+    --m1;
+    cout << "После --m1: " << m1 << endl;
+
+    Money m4 = m2--;
+    cout << "m4 (m2--) = " << m4 << ", m2 = " << m2 << endl;
+
+    return 0;
+}

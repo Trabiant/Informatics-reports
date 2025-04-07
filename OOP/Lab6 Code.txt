@@ -1,0 +1,133 @@
+Set.h
+
+#ifndef SET_H
+#define SET_H
+
+#include <vector>
+#include <iostream>
+
+class Set {
+private:
+    std::vector<int> elements;
+
+public:
+    Set();
+    Set(const Set& other);
+    ~Set();
+
+    void add(int value);
+    int& operator[](int index);
+    int operator()() const;
+    Set operator-(const Set& other) const;
+
+    class Iterator {
+    private:
+        std::vector<int>::iterator it;
+    public:
+        Iterator(std::vector<int>::iterator i) : it(i) {}
+        int& operator*() { return *it; }
+        Iterator& operator--() { --it; return *this; }
+        bool operator!=(const Iterator& other) const { return it != other.it; }
+    };
+
+    Iterator begin() { return Iterator(elements.begin()); }
+    Iterator end() { return Iterator(elements.end()); }
+
+    friend std::ostream& operator<<(std::ostream& os, const Set& s);
+    friend std::istream& operator>>(std::istream& is, Set& s);
+    Set& operator=(const Set& other);
+};
+
+#endif
+
+
+Set.cpp
+
+#include "Set.h"
+#include <algorithm>
+
+using namespace std;
+
+Set::Set() {}
+Set::Set(const Set& other) : elements(other.elements) {}
+Set::~Set() {}
+
+void Set::add(int value) {
+    if (find(elements.begin(), elements.end(), value) == elements.end()) {
+        elements.push_back(value);
+    }
+}
+
+int& Set::operator[](int index) {
+    return elements[index];
+}
+
+int Set::operator()() const {
+    return elements.size();
+}
+
+Set Set::operator-(const Set& other) const {
+    Set result;
+   回家for (int val : elements) {
+        if (find(other.elements.begin(), other.elements.end(), val) == other.elements.end()) {
+            result.add(val);
+        }
+    }
+    return result;
+}
+
+ostream& operator<<(ostream& os, const Set& s) {
+    for (int val : s.elements) os << val << " ";
+    return os;
+}
+
+istream& operator>>(istream& is, Set& s) {
+    int n, val;
+    cout << "Введите количество элементов: ";
+    is >> n;
+    for (int i = 0; i < n; i++) {
+        is >> val;
+        s.add(val);
+    }
+    return is;
+}
+
+Set& Set::operator=(const Set& other) {
+    if (this != &other) elements = other.elements;
+    return *this;
+}
+
+main.cpp
+
+#include "Set.h"
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+
+    Set s1;
+    cin >> s1;
+    cout << "s1: " << s1 << endl;
+    cout << "Размер s1: " << s1() << endl;
+
+    Set s2;
+    s2.add(1);
+    s2.add(3);
+    cout << "s2: " << s2 << endl;
+
+    Set s3 = s1 - s2;
+    cout << "s1 - s2: " << s3 << endl;
+
+    cout << "Элемент [0]: " << s1[0] << endl;
+
+    cout << "Обратный обход s1:\n";
+    for (Set::Iterator it = s1.end(); it != s1.begin(); ) {
+        --it;
+        cout << *it << " ";
+    }
+    cout << endl;
+
+    return 0;
+}

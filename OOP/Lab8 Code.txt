@@ -1,0 +1,210 @@
+Print.h
+
+#ifndef PRINT_H
+#define PRINT_H
+
+#include <string>
+#include <iostream>
+
+class Print {
+protected:
+    std::string title;
+    std::string author;
+
+public:
+    Print() : title(""), author("") {}
+    Print(std::string t, std::string a) : title(t), author(a) {}
+    virtual ~Print() = 0;
+
+    virtual void Show() const = 0;
+    virtual std::string getTitle() const { return title; }
+
+    friend std::istream& operator>>(std::istream& is, Print& p);
+};
+
+#endif
+
+
+Print.cpp
+#include "Print.h"
+
+Print::~Print() {}
+
+std::istream& operator>>(std::istream& is, Print& p) {
+    std::cout << "Название: ";
+    is >> p.title;
+    std::cout << "Автор: ";
+    is >> p.author;
+    return is;
+}
+
+Magazine.h
+
+
+
+#ifndef MAGAZINE_H
+#define MAGAZINE_H
+
+#include "Print.h"
+
+class Magazine : public Print {
+private:
+    int pages;
+
+public:
+    Magazine() : Print(), pages(0) {}
+    Magazine(std::string t, std::string a, int p) : Print(t, a), pages(p) {}
+    ~Magazine() {}
+
+    void Show() const override {
+        std::cout << "Журнал: " << title << ", Автор: " << author << ", Страниц: " << pages << std::endl;
+    }
+};
+
+#endif
+
+List.h
+
+#ifndef LIST_H
+#define LIST_H
+
+#include "Print.h"
+#include <vector>
+
+class List {
+protected:
+    std::vector<Print*> items;
+
+public:
+    List() {}
+    List(int size) : items(size, nullptr) {}
+    List(const List& other);
+    ~List();
+
+    void add(Print* p);
+    void remove(int index);
+    void show() const;
+    int size() const { return items.size(); }
+};
+
+#endif
+
+
+List.cpp
+
+#include "List.h"
+#include <iostream>
+
+using namespace std;
+
+List::List(const List& other) {
+    for (auto p : other.items) items.push_back(p);
+}
+
+List::~List() {
+    for (auto p : items) delete p;
+}
+
+void List::add(Print* p) {
+    items.push_back(p);
+}
+
+void List::remove(int index) {
+    if (index >= 0 && index < items.size()) {
+        delete items[index];
+        items.erase(items.begin() + index);
+    }
+}
+
+void List::show() const {
+    for (const auto* p : items) p->Show();
+}
+
+
+Dialog.h
+
+#ifndef DIALOG_H
+#define DIALOG_H
+
+#include "List.h"
+#include "Magazine.h"
+
+class Dialog : public List {
+private:
+    bool endState;
+
+public:
+    Dialog() : List(), endState(false) {}
+    ~Dialog() {}
+
+    void handleEvent(const std::string& command);
+    bool isEnd() const { return endState; }
+    void showTitles() const;
+};
+
+#endif
+
+
+Dialog.cpp
+
+
+#include "Dialog.h"
+#include <iostream>
+
+using namespace std;
+
+void Dialog::handleEvent(const string& command) {
+    if (command[0] == 'm') {
+        int size = stoi(command.substr(2));
+        items.resize(size, nullptr);
+        cout << "Создана группа из " << size << " элементов\n";
+    }
+    else if (command == "+") {
+        Magazine* m = new Magazine();
+        cin >> *m;
+        add(m);
+    }
+    else if (command == "-") {
+        int index;
+        cout << "Введите индекс для удаления: ";
+        cin >> index;
+        remove(index);
+    }
+    else if (command == "s") {
+        show();
+    }
+    else if (command == "z") {
+        showTitles();
+    }
+    else if (command == "q") {
+        endState = true;
+    }
+}
+
+void Dialog::showTitles() const {
+    for (const auto* p : items) cout << p->getTitle() << endl;
+}
+
+
+main.cpp
+
+#include "Dialog.h"
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+
+    Dialog d;
+    string command;
+
+    cout << "Команды: m <size>, +, -, s, z, q\n";
+    while (!d.isEnd()) {
+        cout << "> ";
+        cin >> command;
+        d.handleEvent(command);
+    }
+
+    return 0;
+}
